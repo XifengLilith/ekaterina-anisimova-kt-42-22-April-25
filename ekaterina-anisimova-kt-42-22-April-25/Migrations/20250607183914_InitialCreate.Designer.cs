@@ -12,8 +12,8 @@ using ekaterina_anisimova_kt_42_22_April_25.Database;
 namespace ekaterina_anisimova_kt_42_22_April_25.Migrations
 {
     [DbContext(typeof(TeacherDbContext))]
-    [Migration("20250411065012_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20250607183914_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,10 +57,10 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DepartmentId"));
 
-                    b.Property<DateTime>("FoundationDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("d_foundation_date")
-                        .HasComment("Дата основания кафедры");
+                    b.Property<int>("FoundationYear")
+                        .HasColumnType("int4")
+                        .HasColumnName("n_foundation_year")
+                        .HasComment("Год основания кафедры");
 
                     b.Property<int?>("HeadOfDepartmentId")
                         .IsRequired()

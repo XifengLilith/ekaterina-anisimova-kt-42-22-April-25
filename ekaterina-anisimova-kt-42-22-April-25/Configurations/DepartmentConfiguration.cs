@@ -26,10 +26,11 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Database.Configurations
                 .HasColumnType(ColumnType.String).HasMaxLength(200)
                 .HasComment("Название кафедры");
 
-            builder.Property(p => p.FoundationDate)
-                .HasColumnName("d_foundation_date")
-                .HasColumnType(ColumnType.Date)
-                .HasComment("Дата основания кафедры");
+            builder.Property(p => p.FoundationYear)
+                .IsRequired()
+                .HasColumnName("n_foundation_year") 
+                .HasColumnType(ColumnType.Int) 
+                .HasComment("Год основания кафедры");
 
             builder.Property(p => p.HeadOfDepartmentId)
                 .HasColumnName("f_head_of_department_id")
@@ -39,16 +40,16 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Database.Configurations
             builder.ToTable(TableName);
 
             builder.HasOne(p => p.HeadOfDepartment)
-                .WithOne() // Одна кафедра имеет одного заведующего
+                .WithOne()
                 .HasForeignKey<Department>(p => p.HeadOfDepartmentId)
                 .HasConstraintName("fk_f_head_of_department_id")
-                .OnDelete(DeleteBehavior.SetNull); // При удалении преподавателя, который является заведующим, связь обнуляется
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(p => p.Teachers)
                 .WithOne(t => t.Department)
                 .HasForeignKey(t => t.DepartmentId)
                 .HasConstraintName("fk_f_department_id")
-                .OnDelete(DeleteBehavior.Cascade); // При удалении кафедры удаляются все преподаватели кафедры
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasIndex(p => p.HeadOfDepartmentId, $"idx_{TableName}_fk_f_head_of_department_id");
         }

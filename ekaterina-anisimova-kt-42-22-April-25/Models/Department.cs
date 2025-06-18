@@ -11,7 +11,7 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Models
         [Required]
         public string Name { get; set; }
 
-        public DateTime FoundationDate { get; set; }
+        public int FoundationYear { get; set; }
 
         [ForeignKey("HeadOfDepartment")]
         public int? HeadOfDepartmentId { get; set; }

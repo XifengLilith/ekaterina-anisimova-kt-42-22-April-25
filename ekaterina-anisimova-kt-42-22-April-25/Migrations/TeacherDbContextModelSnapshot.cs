@@ -55,10 +55,10 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DepartmentId"));
 
-                    b.Property<DateTime>("FoundationDate")
-                        .HasColumnType("timestamp")
-                        .HasColumnName("d_foundation_date")
-                        .HasComment("Дата основания кафедры");
+                    b.Property<int>("FoundationYear")
+                        .HasColumnType("int4")
+                        .HasColumnName("n_foundation_year")
+                        .HasComment("Год основания кафедры");
 
                     b.Property<int?>("HeadOfDepartmentId")
                         .IsRequired()

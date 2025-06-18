@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace ekaterina_anisimova_kt_42_22_April_25.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +55,7 @@ namespace ekaterina_anisimova_kt_42_22_April_25.Migrations
                     department_id = table.Column<int>(type: "integer", nullable: false, comment: "Идентификатор кафедры")
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     c_department_name = table.Column<string>(type: "varchar", maxLength: 200, nullable: false, comment: "Название кафедры"),
-                    d_foundation_date = table.Column<DateTime>(type: "timestamp", nullable: false, comment: "Дата основания кафедры"),
+                    n_foundation_year = table.Column<int>(type: "int4", nullable: false, comment: "Год основания кафедры"),
                     f_head_of_department_id = table.Column<int>(type: "int4", nullable: false, comment: "Идентификатор заведующего кафедрой")
                 },
                 constraints: table =>
