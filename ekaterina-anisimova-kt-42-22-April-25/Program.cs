@@ -2,6 +2,8 @@ using ekaterina_anisimova_kt_42_22_April_25.Database;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using ekaterina_anisimova_kt_42_22_April_25.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -20,6 +22,9 @@ try
     builder.Services.AddDbContext<TeacherDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+    // Регистрируем все сервисы приложения, определенные в ServiceExtensions
+    builder.Services.AddAppServices(); // <-- ЭТА СТРОКА ДОБАВЛЕНА
+
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -35,7 +40,7 @@ try
 
     app.Run();
 }
-catch(Exception ex)
+catch (Exception ex)
 {
     logger.Error(ex, "Stopped program because of exception");
 }
