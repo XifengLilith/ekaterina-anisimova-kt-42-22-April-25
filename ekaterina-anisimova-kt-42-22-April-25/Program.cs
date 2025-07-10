@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 using ekaterina_anisimova_kt_42_22_April_25.Services;
-
+using ekaterina_anisimova_kt_42_22_April_25.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -23,7 +23,7 @@ try
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
     // Регистрируем все сервисы приложения, определенные в ServiceExtensions
-    builder.Services.AddAppServices(); // <-- ЭТА СТРОКА ДОБАВЛЕНА
+    builder.Services.AddAppServices();
 
     var app = builder.Build();
 
@@ -33,6 +33,8 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+
+    app.UseMiddleware<ExceptionHandlerMiddleware>();
 
     app.UseAuthorization();
 
